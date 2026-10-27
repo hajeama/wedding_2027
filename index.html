@@ -438,6 +438,9 @@
       gap: 14px
     }
 
+    .two{display:flex;gap:14px}
+    .two>div{flex:1;min-width:0}
+
     .hidden {
       display: none
     }
@@ -537,8 +540,10 @@
         <h2>Will you join us?</h2>
         <p class="sub">Kindly reply by June 1, 2027</p>
 
-        <label class="f" for="name">Your name</label>
-        <input type="text" id="name" autocomplete="name" required>
+        <div class="two">
+          <div><label class="f" for="fname">First name</label><input type="text" id="fname" autocomplete="given-name" required></div>
+          <div><label class="f" for="lname">Last name</label><input type="text" id="lname" autocomplete="family-name" required></div>
+        </div>
 
         <label class="f">Attending?</label>
         <div class="choices">
@@ -547,7 +552,9 @@
         </div>
 
         <div id="guestsWrap">
-          <label class="f" for="guests">Number attending</label>
+          <label class="f" for="age">Your age</label>
+          <input type="text" id="age" inputmode="numeric" autocomplete="off">
+          <label class="f" for="guests">Number attending (including you)</label>
           <select id="guests">
             <option>1</option>
             <option>2</option>
@@ -558,7 +565,7 @@
             <option>7</option>
             <option>8</option>
           </select>
-          <label class="f" for="note">Your dietary needs or a note for us</label>
+          <label class="f" for="note">Your dietary needs or a note for us (optional)</label>
           <textarea id="note"></textarea>
           <div id="extra"></div>
         </div>
@@ -617,8 +624,9 @@
 
       form.addEventListener('submit', function (e) {
         e.preventDefault();
-        var name = document.getElementById('name').value.trim();
-        if (!name) {msg.textContent = 'Please add your name.'; return }
+        var fname=document.getElementById('fname').value.trim(), lname=document.getElementById('lname').value.trim();
+        var name=(fname+' '+lname).trim();
+        if(!fname||!lname){msg.textContent='Please add your first and last name.';return}
         var yes = att() === 'yes';
         
         var extras = [];
@@ -631,7 +639,8 @@
           }
         }
         var data = {
-          name: name, response: yes ? 'Joyfully accepts' : 'Regretfully declines',
+          var data={name:name,first_name:fname,last_name:lname,age:yes?document.getElementById('age').value.trim():'',
+          response: yes ? 'Joyfully accepts' : 'Regretfully declines',
           guests: yes ? document.getElementById('guests').value : '0',
           note: yes ? document.getElementById('note').value.trim() : '',
           reason: yes ? '' : document.getElementById('reason').value.trim()
@@ -647,7 +656,7 @@
             : 'We\u2019ll miss you, ' + name + '. Thank you for letting us know.';
           if (!ok) {
             var subject = 'RSVP: ' + name + ' \u2013 ' + data.response;
-            var body = 'Name: ' + name + '\nResponse: ' + data.response + (yes ? '\nGuests attending: ' + data.guests + (data.note ? '\nNote: ' + data.note : '') : (data.reason ? '\nReason: ' + data.reason : ''));
+            var body='Name: '+name+(yes&&data.age?'\nAge: '+data.age:'') + '\nResponse: ' + data.response + (yes ? '\nGuests attending: ' + data.guests + (data.note ? '\nNote: ' + data.note : '') : (data.reason ? '\nReason: ' + data.reason : ''));
             if (extras.length) body += '\nAdditional guests:\n' + data.additional_guests.split('; ').join('\n');
             document.getElementById('mailBtn').href = 'mailto:' + RSVP_EMAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
             document.getElementById('mailTo').textContent = RSVP_EMAIL;
