@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Wedding Invitation · Alex &amp; Jordan</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400;500&family=Great+Vibes&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      box-sizing: border-box;
+      padding-top: env(safe-area-inset-top, 0px);
+      padding-bottom: env(safe-area-inset-bottom, 0px);
+      --gold: #a8812c;
+      --bg: #cfe2f5;
+      --card: #fbfdff;
+      --ink: #17304f;
+      --muted: #5c7390;
+      --accent: #2a62a8;
+      --line: #b9d0e8;
+      --btn-ink: #fbfdff;
+      --serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+      --sans: "Jost", "Helvetica Neue", Arial, sans-serif;
+      --script: "Great Vibes", "Snell Roundhand", "Brush Script MT", cursive;
+    }
+
+    @media (prefers-color-scheme:dark) {
+      :root:not([data-theme="light"]) {
+        --gold: #d9b564;
+        --bg: #0f1a28;
+        --card: #162337;
+        --ink: #e6eef8;
+        --muted: #8fa5c0;
+        --accent: #7fa8dc;
+        --line: #26384f;
+        --btn-ink: #0f1a28;
+        color-scheme: dark
+      }
+    }
+
+    :root[data-theme="dark"] {
+      --gold: #d9b564;
+      --bg: #0f1a28;
+      --card: #162337;
+      --ink: #e6eef8;
+      --muted: #8fa5c0;
+      --accent: #7fa8dc;
+      --line: #26384f;
+      --btn-ink: #0f1a28;
+      color-scheme: dark
+    }
+
+    html {
+      scroll-padding-top: env(safe-area-inset-top, 0px)
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-weight: 300;
+      line-height: 1.6
+    }
+
+    main {
+      max-width: 520px;
+      margin: 0 auto;
+      padding: 40px 20px 56px
+    }
+
+    .card {
+      position: relative;
+      background: var(--card);
+      border: 1px solid var(--gold);
+      padding: 56px 32px 48px;
+      text-align: center
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 9px;
+      border: 3px double var(--gold);
+      pointer-events: none
+    }
+
+    .c {
+      position: absolute;
+      width: 64px;
+      height: 64px;
+      color: var(--gold);
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.5;
+      stroke-linecap: round
+    }
+
+    .c.tl {
+      top: 4px;
+      left: 4px
+    }
+
+    .c.tr {
+      top: 4px;
+      right: 4px;
+      transform: scaleX(-1)
+    }
+
+    .c.bl {
+      bottom: 4px;
+      left: 4px;
+      transform: scaleY(-1)
+    }
+
+    .c.br {
+      bottom: 4px;
+      right: 4px;
+      transform: scale(-1, -1)
+    }
+
+    .script {
+      font-family: var(--script);
+      font-size: 32px;
+      line-height: 1.2;
+      color: var(--accent);
+      margin: 10px 0 0
+    }
+
+    .eyebrow {
+      font-size: 12px;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0 0 20px
+    }
+
+    h1 {
+      font-family: var(--script);
+      font-weight: 400;
+      font-size: clamp(58px, 17vw, 84px);
+      line-height: 1.1;
+      margin: 0
+    }
+
+    h1 span {
+      display: block;
+      font-size: .55em;
+      color: var(--gold);
+      margin: 0
+    }
+
+    .rule {
+      position: relative;
+      width: 140px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 26px auto
+    }
+
+    .rule::after {
+      content: "\25C6";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 10px;
+      line-height: 1;
+      color: var(--gold);
+      background: var(--card);
+      padding: 0 8px
+    }
+
+    .date {
+      font-family: var(--serif);
+      font-size: 26px;
+      margin: 0
+    }
+
+    .details {
+      color: var(--muted);
+      margin: 6px 0 0
+    }
+
+    form {
+      text-align: left;
+      margin-top: 36px
+    }
+
+    h2 {
+      font-family: var(--script);
+      font-weight: 400;
+      font-size: 42px;
+      line-height: 1.2;
+      color: var(--accent);
+      text-align: center;
+      margin: 0 0 4px
+    }
+
+    .sub {
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+      margin: 0 0 24px
+    }
+
+    label.f {
+      display: block;
+      font-size: 12px;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 18px 0 6px
+    }
+
+    input[type=text],
+    select,
+    textarea {
+      width: 100%;
+      font: inherit;
+      font-size: 16px;
+      color: var(--ink);
+      background: transparent;
+      border: 0;
+      border-bottom: 1px solid var(--line);
+      padding: 8px 2px;
+      border-radius: 0
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 64px
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: none;
+      border-bottom-color: var(--accent)
+    }
+
+    .choices {
+      display: flex;
+      gap: 10px;
+      margin-top: 4px
+    }
+
+    .choices label {
+      flex: 1;
+      cursor: pointer
+    }
+
+    .choices input {
+      position: absolute;
+      opacity: 0
+    }
+
+    .choices span {
+      display: block;
+      text-align: center;
+      padding: 12px 8px;
+      border: 1px solid var(--line);
+      font-size: 14px
+    }
+
+    .choices input:checked+span {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: var(--btn-ink)
+    }
+
+    .choices input:focus-visible+span {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px
+    }
+
+    button {
+      width: 100%;
+      margin-top: 28px;
+      padding: 14px;
+      font: inherit;
+      font-weight: 400;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      font-size: 13px;
+      background: var(--accent);
+      color: var(--btn-ink);
+      border: 0;
+      cursor: pointer
+    }
+
+    button:disabled {
+      opacity: .5;
+      cursor: default
+    }
+
+    .msg {
+      text-align: center;
+      font-size: 14px;
+      color: var(--muted);
+      margin-top: 14px;
+      min-height: 1.2em
+    }
+
+    .thanks {
+      text-align: center;
+      margin-top: 36px
+    }
+
+    .hero {
+      margin: 0 0 28px
+    }
+
+    .hero img {
+      display: block;
+      width: 100%;
+      max-height: 480px;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+      border-radius: 999px 999px 0 0;
+      border: 1px solid var(--gold);
+      outline: 1px solid var(--gold);
+      outline-offset: 5px
+    }
+
+    .upl {
+      display: inline-block;
+      margin: 0 0 16px;
+      padding: 8px 14px;
+      border: 1px dashed var(--accent);
+      color: var(--accent);
+      font-size: 13px;
+      cursor: pointer
+    }
+
+    .cross {
+      display: block;
+      margin: 0 auto 14px;
+      width: 26px;
+      height: 36px;
+      color: var(--gold)
+    }
+
+    .vwrap {
+      margin-top: 30px;
+      padding-top: 24px;
+      border-top: 1px solid var(--gold)
+    }
+
+    .verse {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 19px;
+      line-height: 1.45;
+      margin: 0
+    }
+
+    .ref {
+      font-size: 12px;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin: 8px 0 0
+    }
+
+    .emblem {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin: 0 0 14px;
+      color: var(--gold)
+    }
+
+    .emblem .cross {
+      margin: 0
+    }
+
+    .dove {
+      width: 54px;
+      height: 36px;
+      fill: currentColor
+    }
+
+    .dove.r {
+      transform: scaleX(-1)
+    }
+
+    .mailbtn {
+      display: block;
+      text-align: center;
+      text-decoration: none;
+      padding: 14px;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      font-size: 13px;
+      background: var(--accent);
+      color: var(--btn-ink)
+    }
+
+    .copy {
+      white-space: pre-wrap;
+      text-align: left;
+      font: inherit;
+      font-size: 14px;
+      border: 1px solid var(--line);
+      padding: 12px;
+      margin: 0
+    }
+
+    .hidden {
+      display: none
+    }
+
+    .owner {
+      margin-top: 28px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      padding: 24px
+    }
+
+    .owner h3 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 22px;
+      margin: 0 0 4px
+    }
+
+    .tally {
+      color: var(--muted);
+      font-size: 14px;
+      margin: 0 0 14px
+    }
+
+    .row {
+      padding: 10px 0;
+      border-top: 1px solid var(--line);
+      font-size: 14px
+    }
+
+    .row b {
+      font-weight: 500
+    }
+
+    .row small {
+      display: block;
+      color: var(--muted)
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <div class="card">
+      <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+        <symbol id="corner" viewBox="0 0 64 64">
+          <path d="M6 60V24C6 13 13 6 24 6H60" />
+          <path d="M17 17c11-4 18 2 18 13-11 4-18-2-18-13z" />
+          <path d="M17 17l12 12" />
+          <circle cx="6" cy="6" r="2.5" fill="currentColor" />
+        </symbol>
+      </svg>
+      <svg class="c tl" aria-hidden="true">
+        <use href="#corner" />
+      </svg><svg class="c tr" aria-hidden="true">
+        <use href="#corner" />
+      </svg><svg class="c bl" aria-hidden="true">
+        <use href="#corner" />
+      </svg><svg class="c br" aria-hidden="true">
+        <use href="#corner" />
+      </svg>
+      <figure class="hero" id="hero"><img id="heroImg" src="prenup.jpg" alt="Alex and Jordan"
+          onerror="document.getElementById('hero').remove()"></figure>
+      <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+        <symbol id="dove" viewBox="0 0 48 32">
+          <ellipse cx="26" cy="20" rx="12" ry="4.6" transform="rotate(-14 26 20)" />
+          <circle cx="37.5" cy="14" r="3.6" />
+          <path d="M40.5 13.2l4 1.5-4 1.2z" />
+          <path d="M27 17C27 8 20 2.5 10 1.5 12.5 7 16 13 22 18.5z" />
+          <path d="M18 22.5L2 27l4.5-4L2 19.5z" />
+          <path d="M22 22C20 26 15 29 9 30c4-3 7-6 9-9z" opacity=".7" />
+        </symbol>
+      </svg>
+      <div class="emblem"><svg class="dove" aria-hidden="true">
+          <use href="#dove" />
+        </svg><svg class="cross" viewBox="0 0 26 36" fill="none" stroke="currentColor" stroke-width="2.5"
+          stroke-linecap="round" aria-hidden="true">
+          <path d="M13 2v32M4 12h18" />
+        </svg><svg class="dove r" aria-hidden="true">
+          <use href="#dove" />
+        </svg></div>
+      <p class="eyebrow">Together with God and their families</p>
+      <h1>Renzo<span>&amp;</span>Jeah</h1>
+      <p class="script">are getting married</p>
+      <div class="rule"></div>
+      <p class="date">Thursday, July 8, 2027</p>
+      <p class="details">Waterfront Hotel & Casino at 4:00 PM<br>Lahug, Cebu City</p>
+      <p class="details" style="margin-top:14px">Reception to follow</p>
+
+      <div class="vwrap">
+        <p class="verse">“…where you go I will go, and where you stay I will stay. Your people will be my people and your God my God..”</p>
+        <p class="ref">Ruth 1:16</p>
+      </div>
+
+      <form id="form" novalidate>
+        <h2>Will you join us?</h2>
+        <p class="sub">Kindly reply by June 1, 2027</p>
+
+        <label class="f" for="name">Your name</label>
+        <input type="text" id="name" autocomplete="name" required>
+
+        <label class="f">Attending?</label>
+        <div class="choices">
+          <label><input type="radio" name="att" value="yes" checked><span>Joyfully accepts</span></label>
+          <label><input type="radio" name="att" value="no"><span>Regretfully declines</span></label>
+        </div>
+
+        <div id="guestsWrap">
+          <label class="f" for="guests">Number attending</label>
+          <select id="guests">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+          </select>
+          <label class="f" for="note">Dietary needs or a note for us</label>
+          <textarea id="note"></textarea>
+        </div>
+
+        <div id="reasonWrap" class="hidden">
+          <label class="f" for="reason">Reason you can’t make it</label>
+          <textarea id="reason"></textarea>
+        </div>
+
+        <button type="submit" id="send">Send RSVP</button>
+        <p class="msg" id="msg" role="status"></p>
+      </form>
+
+      <div class="thanks hidden" id="thanks">
+        <h2>Thank you</h2>
+        <p class="sub" id="thanksText"></p>
+        <div id="fallback" class="hidden">
+          <p class="sub">We couldn’t send your RSVP automatically. Please send it by email:</p>
+          <a class="mailbtn" id="mailBtn" href="#" target="_blank" rel="noopener">Send RSVP by email</a>
+          <p class="sub" style="margin-top:18px">Button not opening? Email <b id="mailTo"></b> with this message:</p>
+          <pre class="copy" id="mailBody"></pre>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    (function () {
+      // 1) Create a free form at formspree.io and paste your form URL here:
+      var FORM_ENDPOINT = 'https://formspree.io/f/maeeeklr';
+      // 2) Backup address if the form can't send:
+      var RSVP_EMAIL = 'amamangpangjeahfe@gmail.com';
+
+      var form = document.getElementById('form'), msg = document.getElementById('msg'), send = document.getElementById('send');
+      var gw = document.getElementById('guestsWrap'), rw = document.getElementById('reasonWrap');
+      function att() {return document.querySelector('input[name=att]:checked').value}
+      form.addEventListener('change', function () {var no = att() === 'no'; gw.classList.toggle('hidden', no); rw.classList.toggle('hidden', !no)});
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var name = document.getElementById('name').value.trim();
+        if (!name) {msg.textContent = 'Please add your name.'; return }
+        var yes = att() === 'yes';
+        var data = {
+          name: name, response: yes ? 'Joyfully accepts' : 'Regretfully declines',
+          guests: yes ? document.getElementById('guests').value : '0',
+          note: yes ? document.getElementById('note').value.trim() : '',
+          reason: yes ? '' : document.getElementById('reason').value.trim()
+        };
+        send.disabled = true; msg.textContent = 'Sending\u2026';
+
+        function done(ok) {
+          form.classList.add('hidden');
+          document.getElementById('thanksText').textContent = yes
+            ? 'We can\u2019t wait to celebrate with you, ' + name + '.'
+            : 'We\u2019ll miss you, ' + name + '. Thank you for letting us know.';
+          if (!ok) {
+            var subject = 'RSVP: ' + name + ' \u2013 ' + data.response;
+            var body = 'Name: ' + name + '\nResponse: ' + data.response + (yes ? '\nGuests attending: ' + data.guests + (data.note ? '\nNote: ' + data.note : '') : (data.reason ? '\nReason: ' + data.reason : ''));
+            document.getElementById('mailBtn').href = 'mailto:' + RSVP_EMAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+            document.getElementById('mailTo').textContent = RSVP_EMAIL;
+            document.getElementById('mailBody').textContent = 'Subject: ' + subject + '\n\n' + body;
+            document.getElementById('fallback').classList.remove('hidden');
+          }
+          document.getElementById('thanks').classList.remove('hidden');
+        }
+
+        if (FORM_ENDPOINT.indexOf('YOUR_FORM_ID') > -1) {done(false); return }
+        fetch(FORM_ENDPOINT, {method: 'POST', headers: {'Content-Type': 'application/json', 'Accept': 'application/json'}, body: JSON.stringify(data)})
+          .then(function (r) {if (!r.ok) throw new Error('bad'); done(true)})
+          .catch(function () {done(false)});
+      });
+    })();
+  </script>
+</body>
+
+</html>
