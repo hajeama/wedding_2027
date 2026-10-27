@@ -652,8 +652,8 @@
         function done(ok) {
           form.classList.add('hidden');
           document.getElementById('thanksText').textContent = yes
-            ? 'We can\u2019t wait to celebrate with you, ' + name + '.'
-            : 'We\u2019ll miss you, ' + name + '. Thank you for letting us know.';
+            ? 'We can\u2019t wait to celebrate with you, ' + fname + '.'
+            : 'We\u2019ll miss you, ' + fname + '. Thank you for letting us know.';
           if (!ok) {
             var subject = 'RSVP: ' + name + ' \u2013 ' + data.response;
             var body='Name: '+name+(yes&&data.age?'\nAge: '+data.age:'') + '\nResponse: ' + data.response + (yes ? '\nGuests attending: ' + data.guests + (data.note ? '\nNote: ' + data.note : '') : (data.reason ? '\nReason: ' + data.reason : ''));
