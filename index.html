@@ -638,8 +638,9 @@
             extras.push(g);
           }
         }
-        var data = {
-          var data={name:name,first_name:fname,last_name:lname,age:yes?document.getElementById('age').value.trim():'',
+        var data={
+          name: name, first_name: fname, last_name: lname,
+          age: yes ? document.getElementById('age').value.trim() : '',
           response: yes ? 'Joyfully accepts' : 'Regretfully declines',
           guests: yes ? document.getElementById('guests').value : '0',
           note: yes ? document.getElementById('note').value.trim() : '',
