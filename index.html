@@ -414,6 +414,30 @@
       margin: 0
     }
 
+    .gcard {
+      border-top: 1px solid var(--gold);
+      margin-top: 22px;
+      padding-top: 6px
+    }
+
+    .gh {
+      font-family: var(--script);
+      font-size: 26px;
+      line-height: 1.2;
+      color: var(--accent);
+      margin: 8px 0 0
+    }
+
+    .gcard input {
+      margin-top: 8px
+    }
+
+    .grow {
+      display: grid;
+      grid-template-columns: 84px 1fr;
+      gap: 14px
+    }
+
     .hidden {
       display: none
     }
@@ -523,16 +547,12 @@
         </div>
 
         <div id="guestsWrap">
-          <label class="f" for="guests">Number attending</label>
-          <select id="guests">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-          </select>
-          <label class="f" for="note">Dietary needs or a note for us</label>
-          <textarea id="note"></textarea>
-        </div>
+        <label class="f" for="guests">Number attending</label>
+        <select id="guests"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option></select>
+        <label class="f" for="note">Your dietary needs or a note for us</label>
+        <textarea id="note"></textarea>
+        <div id="extra"></div>
+      </div>
 
         <div id="reasonWrap" class="hidden">
           <label class="f" for="reason">Reason you can’t make it</label>
@@ -569,14 +589,37 @@
       function att() {return document.querySelector('input[name=att]:checked').value}
       form.addEventListener('change', function () {var no = att() === 'no'; gw.classList.toggle('hidden', no); rw.classList.toggle('hidden', !no)});
 
+      var guestsSel = document.getElementById('guests'), extra = document.getElementById('extra');
+      function mk(cls, ph, numeric) {var i = document.createElement('input'); i.type = 'text'; i.className = cls; i.placeholder = ph; i.setAttribute('aria-label', ph); if (numeric) i.inputMode = 'numeric'; return i}
+      function renderExtra() {
+        var n = (+guestsSel.value || 1) - 1;
+        while (extra.children.length > n) extra.removeChild(extra.lastChild);
+        for (var i = extra.children.length; i < n; i++) {
+          var c = document.createElement('div'); c.className = 'gcard';
+          var h = document.createElement('p'); h.className = 'gh'; h.textContent = 'Guest ' + (i + 2);
+          var row = document.createElement('div'); row.className = 'grow';
+          row.appendChild(mk('ga', 'Age', true)); row.appendChild(mk('gd', 'Dietary needs (optional)', false));
+          c.appendChild(h); c.appendChild(mk('gn', 'Full name', false)); c.appendChild(row);
+          extra.appendChild(c);
+        }
+      }
+      guestsSel.addEventListener('change', renderExtra);
+
       form.addEventListener('submit', function (e) {
         e.preventDefault();
         var name = document.getElementById('name').value.trim();
         if (!name) {msg.textContent = 'Please add your name.'; return }
         var yes = att() === 'yes';
+        var extras=[].map.call(extra.querySelectorAll('.g'),function(g){
+          return {name:g.querySelector('.gn').value.trim(),age:g.querySelector('.ga').value.trim(),diet:g.querySelector('.gd').value.trim()};
+        });
+        if(yes&&extras.some(function(g){return !g.name})){msg.textContent='Please add a name for each guest.';return}
         var data = {
           name: name, response: yes ? 'Joyfully accepts' : 'Regretfully declines',
           guests: yes ? document.getElementById('guests').value : '0',
+          additional_guests: yes ? extras.map(function(g){
+            return g.name+(g.age?' ('+g.age+')':'')+(g.diet?' - '+g.diet:'');
+          }).join('; ') : '',
           note: yes ? document.getElementById('note').value.trim() : '',
           reason: yes ? '' : document.getElementById('reason').value.trim()
         };
@@ -589,7 +632,7 @@
             : 'We\u2019ll miss you, ' + name + '. Thank you for letting us know.';
           if (!ok) {
             var subject = 'RSVP: ' + name + ' \u2013 ' + data.response;
-            var body = 'Name: ' + name + '\nResponse: ' + data.response + (yes ? '\nGuests attending: ' + data.guests + (data.note ? '\nNote: ' + data.note : '') : (data.reason ? '\nReason: ' + data.reason : ''));
+            var body = 'Name: ' + name + '\nResponse: ' + data.response + (yes ? '\nGuests attending: ' + data.guests +(data.additional_guests?'\nAdditional guests: '+data.additional_guests:'') + (data.note ? '\nNote: ' + data.note : '') : (data.reason ? '\nReason: ' + data.reason : ''));
             document.getElementById('mailBtn').href = 'mailto:' + RSVP_EMAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
             document.getElementById('mailTo').textContent = RSVP_EMAIL;
             document.getElementById('mailBody').textContent = 'Subject: ' + subject + '\n\n' + body;
